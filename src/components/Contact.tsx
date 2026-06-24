@@ -150,7 +150,7 @@ export default function Contact() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7"
           >
-            <div className="bg-slate-900/40 border border-slate-900 rounded-3xl p-8 relative overflow-hidden shadow-xl min-h-[500px] flex flex-col justify-center">
+            <div className="bg-slate-900/15 backdrop-blur-md border border-slate-900/80 rounded-3xl p-8 relative overflow-hidden shadow-xl min-h-[500px] flex flex-col justify-center hover:border-amber-500/20 transition-all duration-500">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div 

@@ -126,7 +126,7 @@ export default function About() {
                   key={index}
                   variants={cardVariants}
                   whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
-                  className="bg-slate-900/40 border border-slate-900 rounded-2xl p-6 hover:border-slate-800/80 hover:bg-slate-900/60 transition-colors duration-300 group cursor-default shadow-md hover:shadow-lg hover:shadow-slate-950/40"
+                  className="bg-slate-900/20 backdrop-blur-md border border-slate-900/80 rounded-2xl p-6 hover:border-amber-500/30 hover:bg-slate-900/40 transition-all duration-300 group cursor-default shadow-lg shadow-slate-950/20"
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${diff.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                     <IconComp className="w-6 h-6" />

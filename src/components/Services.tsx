@@ -222,7 +222,7 @@ export default function Services() {
                 onClick={() => setSelectedService(service)}
                 variants={cardVariants}
                 whileHover={{ y: -8, transition: { duration: 0.2, ease: "easeOut" } }}
-                className="bg-slate-900/30 border border-slate-900 rounded-2xl p-6 lg:p-8 hover:border-slate-800/80 hover:bg-slate-900/50 transition-colors duration-300 group cursor-pointer flex flex-col justify-between shadow-md hover:shadow-lg"
+                className="bg-slate-900/15 backdrop-blur-md border border-slate-900/80 rounded-2xl p-6 lg:p-8 hover:border-amber-500/30 hover:bg-slate-900/30 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-lg shadow-slate-950/20 hover:shadow-slate-950/40"
               >
                 <div>
                   {/* Icon */}
@@ -274,7 +274,7 @@ export default function Services() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="relative w-full max-w-lg bg-slate-900 border-l border-slate-800 shadow-2xl h-full flex flex-col justify-between z-10"
+              className="relative w-full max-w-lg bg-slate-950/80 backdrop-blur-xl border-l border-slate-900/80 shadow-2xl h-full flex flex-col justify-between z-10"
             >
               <div>
                 {/* Header */}

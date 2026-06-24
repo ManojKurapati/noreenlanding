@@ -68,7 +68,7 @@ export default function WhyRisk() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 bg-slate-900/30 border border-slate-900 rounded-3xl p-8 lg:p-10 relative overflow-hidden"
+            className="lg:col-span-6 bg-slate-900/20 backdrop-blur-md border border-slate-900/80 rounded-3xl p-8 lg:p-10 relative overflow-hidden shadow-xl shadow-slate-950/20 hover:border-amber-500/20 transition-colors duration-500"
           >
             <div className="absolute top-0 right-0 p-6 opacity-[0.02] pointer-events-none">
               <Shield className="w-48 h-48 text-slate-100" />

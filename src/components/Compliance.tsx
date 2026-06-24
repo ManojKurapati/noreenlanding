@@ -37,7 +37,7 @@ export default function Compliance() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-900 rounded-3xl p-8 lg:p-12 relative overflow-hidden shadow-xl"
+          className="bg-slate-900/10 backdrop-blur-md border border-slate-900/80 rounded-3xl p-8 lg:p-12 relative overflow-hidden shadow-xl hover:border-amber-500/20 transition-all duration-500"
         >
           {/* Subtle Decorative Elements */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -74,7 +74,7 @@ export default function Compliance() {
                     key={idx} 
                     variants={stepItem}
                     whileHover={{ y: -4, x: 2, transition: { duration: 0.2 } }}
-                    className="flex gap-3 bg-slate-900/60 border border-slate-800/40 rounded-2xl p-4 hover:border-slate-800/80 transition-colors duration-300 shadow-sm cursor-default"
+                    className="flex gap-3 bg-slate-950/30 backdrop-blur-md border border-slate-900/80 rounded-2xl p-4 hover:border-amber-500/20 hover:bg-slate-900/40 transition-all duration-300 shadow-sm cursor-default"
                   >
                     <div className="p-2.5 rounded-xl bg-slate-950 text-teal-400 shrink-0">
                       <IconComp className="w-5 h-5" />

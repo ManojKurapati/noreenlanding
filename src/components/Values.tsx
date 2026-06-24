@@ -100,7 +100,7 @@ export default function Values() {
                 key={idx}
                 variants={cardVariants}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className={`bg-slate-900/20 border ${val.accent} rounded-2xl p-6 lg:p-8 hover:border-slate-800 transition-colors duration-300 group cursor-default shadow-sm hover:shadow-md`}
+                className={`bg-slate-900/10 backdrop-blur-md border ${val.accent} rounded-2xl p-6 lg:p-8 hover:border-amber-500/20 hover:bg-slate-900/25 transition-all duration-300 group cursor-default shadow-lg shadow-slate-950/15`}
               >
                 <div className="flex gap-4 items-start">
                   <div className="p-3 bg-slate-950 rounded-xl group-hover:scale-105 transition-transform duration-300">

@@ -1,4 +1,5 @@
 import { Shield, Users, Zap, Scale, Award, HeartHandshake } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Values() {
   const values = [
@@ -40,13 +41,40 @@ export default function Values() {
     }
   ];
 
+  const gridContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
+    }
+  };
+
   return (
     <section id="values" className="py-24 bg-slate-950/20 border-t border-slate-900 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-xs font-semibold uppercase tracking-widest text-amber-500 block mb-3">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
+          <span className="text-xs font-semibold uppercase tracking-widest text-amber-500 block mb-3 font-sans">
             Our Foundation
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-100 font-display mb-4">
@@ -55,23 +83,31 @@ export default function Values() {
           <p className="text-slate-400 text-sm sm:text-base">
             These guiding principles form the foundation of our firm, driving the impact we deliver to our partners.
           </p>
-        </div>
+        </motion.div>
 
         {/* Values Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {values.map((val, idx) => {
             const IconComp = val.icon;
             return (
-              <div
+              <motion.div
                 key={idx}
-                className={`bg-slate-900/20 border ${val.accent} rounded-2xl p-6 lg:p-8 hover:border-slate-800 transition-all duration-300 group`}
+                variants={cardVariants}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className={`bg-slate-900/20 border ${val.accent} rounded-2xl p-6 lg:p-8 hover:border-slate-800 transition-colors duration-300 group cursor-default shadow-sm hover:shadow-md`}
               >
                 <div className="flex gap-4 items-start">
                   <div className="p-3 bg-slate-950 rounded-xl group-hover:scale-105 transition-transform duration-300">
                     <IconComp className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-200 mb-2 group-hover:text-slate-100 transition-colors">
+                    <h3 className="text-lg font-bold text-slate-200 mb-2 group-hover:text-slate-100 transition-colors font-display">
                       {val.title}
                     </h3>
                     <p className="text-sm leading-relaxed text-slate-400">
@@ -79,10 +115,10 @@ export default function Values() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

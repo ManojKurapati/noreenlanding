@@ -1,4 +1,5 @@
 import { Shield, TrendingUp, Key, HelpCircle, CheckSquare, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function WhyRisk() {
   const benefits = [
@@ -10,6 +11,25 @@ export default function WhyRisk() {
     { text: "Unlock sustainable growth opportunities", icon: TrendingUp }
   ];
 
+  const benefitsContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const benefitItem = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
   return (
     <section id="why-risk" className="py-24 bg-slate-950/20 relative overflow-hidden border-t border-slate-900">
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
@@ -18,7 +38,13 @@ export default function WhyRisk() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Text and context */}
-          <div className="lg:col-span-6 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 space-y-6"
+          >
             <span className="text-xs font-semibold uppercase tracking-widest text-amber-500 block">
               Confidence & Growth
             </span>
@@ -34,34 +60,51 @@ export default function WhyRisk() {
             <p className="text-slate-300 font-medium">
               At FourteenSeven, we help organizations embed risk intelligence into the fabric of their business.
             </p>
-          </div>
+          </motion.div>
 
           {/* Key Benefits Grid */}
-          <div className="lg:col-span-6 bg-slate-900/30 border border-slate-900 rounded-3xl p-8 lg:p-10 relative">
-            <div className="absolute top-0 right-0 p-6 opacity-[0.02]">
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 bg-slate-900/30 border border-slate-900 rounded-3xl p-8 lg:p-10 relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 p-6 opacity-[0.02] pointer-events-none">
               <Shield className="w-48 h-48 text-slate-100" />
             </div>
             
-            <h3 className="text-lg font-semibold text-slate-200 mb-6">
+            <h3 className="text-lg font-semibold text-slate-200 mb-6 font-display">
               Strategic Value of Modern Risk Governance
             </h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <motion.div 
+              variants={benefitsContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            >
               {benefits.map((benefit, index) => {
                 const IconComp = benefit.icon;
                 return (
-                  <div key={index} className="flex gap-3 items-start">
-                    <div className="p-2 rounded-lg bg-slate-800 text-teal-400 mt-0.5 shrink-0">
+                  <motion.div 
+                    key={index} 
+                    variants={benefitItem}
+                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    className="flex gap-3 items-start group/benefit cursor-default"
+                  >
+                    <div className="p-2 rounded-lg bg-slate-850 text-teal-400 mt-0.5 shrink-0 group-hover/benefit:bg-teal-500 group-hover/benefit:text-slate-950 transition-colors duration-300">
                       <IconComp className="w-4 h-4" />
                     </div>
-                    <span className="text-slate-300 text-sm font-medium leading-tight">
+                    <span className="text-slate-300 text-sm font-medium leading-tight group-hover/benefit:text-slate-200 transition-colors">
                       {benefit.text}
                     </span>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
         </div>
       </div>

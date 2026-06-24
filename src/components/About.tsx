@@ -1,4 +1,5 @@
 import { CheckCircle2, Award, Users, Cpu, Target, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function About() {
   const differentiators = [
@@ -40,11 +41,39 @@ export default function About() {
     }
   ];
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
+    }
+  };
+
   return (
     <section id="about" className="py-24 bg-slate-950/40 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Top Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20"
+        >
           <div className="lg:col-span-5">
             <span className="text-xs font-semibold uppercase tracking-widest text-teal-400 block mb-3">
               Who We Are
@@ -64,40 +93,54 @@ export default function About() {
               Unlike traditional consultants, we go beyond presentations. We work alongside our clients to deliver practical solutions that create lasting impact.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* What Sets Us Apart */}
         <div>
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-slate-100 mb-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl font-bold text-slate-100 mb-2 font-display">
               What Sets Us Apart
             </h3>
             <p className="text-slate-400 max-w-xl mx-auto">
               Our unique approach combines decades of practical governance expertise with technology-enabled operating models.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {differentiators.map((diff, index) => {
               const IconComp = diff.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-slate-900/40 border border-slate-900 rounded-2xl p-6 hover:border-slate-800/80 hover:bg-slate-900/60 transition-all duration-300 group"
+                  variants={cardVariants}
+                  whileHover={{ y: -6, transition: { duration: 0.2, ease: "easeOut" } }}
+                  className="bg-slate-900/40 border border-slate-900 rounded-2xl p-6 hover:border-slate-800/80 hover:bg-slate-900/60 transition-colors duration-300 group cursor-default shadow-md hover:shadow-lg hover:shadow-slate-950/40"
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${diff.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                     <IconComp className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-semibold text-slate-200 mb-2 group-hover:text-slate-100 transition-colors">
+                  <h4 className="text-lg font-semibold text-slate-200 mb-2 group-hover:text-slate-100 transition-colors font-display">
                     {diff.title}
                   </h4>
                   <p className="text-sm leading-relaxed text-slate-400">
                     {diff.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

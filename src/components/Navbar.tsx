@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ShieldCheck, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,10 +24,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-slate-950/80 backdrop-blur-md border-b border-slate-900 py-3 shadow-lg"
+          ? "bg-slate-950/85 backdrop-blur-md border-b border-slate-900/80 py-3 shadow-lg"
           : "bg-transparent py-5"
       }`}
     >
@@ -53,16 +57,17 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-400 hover:text-slate-100 transition-colors duration-200"
+                className="text-sm font-medium text-slate-400 hover:text-slate-100 transition-colors duration-200 relative py-1 group/link"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-teal-400 group-hover/link:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
 
           <div className="hidden md:block">
             <a href="#contact">
-              <Button className="bg-teal-600 hover:bg-teal-700 text-slate-950 font-semibold border-none rounded-lg shadow-lg shadow-teal-500/10 transition-all duration-300 hover:translate-y-[-1px]">
+              <Button className="bg-teal-600 hover:bg-teal-700 text-slate-950 font-semibold border-none rounded-lg shadow-lg shadow-teal-500/10 transition-all duration-300 hover:translate-y-[-1px] hover:shadow-teal-500/20 active:translate-y-[0px]">
                 Schedule Consultation
               </Button>
             </a>
@@ -85,33 +90,41 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-slate-950 border-b border-slate-900 animate-in fade-in slide-in-from-top-4 duration-200">
-          <div className="px-4 pt-2 pb-6 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-900 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-4 px-3">
-              <a
-                href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block"
-              >
-                <Button className="w-full bg-teal-600 hover:bg-teal-700 text-slate-950 font-semibold border-none py-3">
-                  Schedule Consultation
-                </Button>
-              </a>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-slate-950 border-b border-slate-900 overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-base font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-900 transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <div className="pt-4 px-3">
+                <a
+                  href="#contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block"
+                >
+                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-slate-950 font-semibold border-none py-3">
+                    Schedule Consultation
+                  </Button>
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }
